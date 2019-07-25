@@ -11,5 +11,4 @@ class DatabaseHelperImpl : DatabaseHelper {
   override fun getCachedNews(): Single<NewsDataEntity> {
 
   }
-
 }
