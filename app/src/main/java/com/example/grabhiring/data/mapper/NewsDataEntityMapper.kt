@@ -21,9 +21,7 @@ class NewsDataEntityMapperImpl : NewsDataEntityMapper {
       newsDomainModel.articles.map {
         ArticlesDataEntity(
           SourceDataEntity(it.source.id, it.source.name),
-          it.author, it.title, it.description,it.url,it.urlToImage,
-          it.publishedAt,
-          it.content
+          it.author, it.title, it.description, it.url, it.urlToImage, it.publishedAt, it.content
         )
       }.toList() as ArrayList<ArticlesDataEntity>
     )
