@@ -8,7 +8,7 @@ import com.example.grabhiring.data.BackgroundSchedulerImpl
 import com.example.grabhiring.data.Repository
 import com.example.grabhiring.data.RepositoryImpl
 import com.example.grabhiring.data.api.NewsApiClientFactory
-import com.example.grabhiring.data.api.NewsApiCluentFactoryImpl
+import com.example.grabhiring.data.api.NewsApiClientFactoryImpl
 import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
 import dagger.Module
@@ -27,7 +27,7 @@ class AppModule {
 
   @PerApplication
   @Provides
-  fun providesNewsApiClientFactory(): NewsApiClientFactory = NewsApiCluentFactoryImpl()
+  fun providesNewsApiClientFactory(): NewsApiClientFactory = NewsApiClientFactoryImpl()
 
   @PerApplication
   @Provides

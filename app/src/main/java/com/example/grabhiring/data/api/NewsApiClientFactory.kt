@@ -10,7 +10,7 @@ interface NewsApiClientFactory {
   fun getNews(): Single<NewsDataEntity>
 }
 
-class NewsApiCluentFactoryImpl : NewsApiClientFactory {
+class NewsApiClientFactoryImpl : NewsApiClientFactory {
 
   private var retrofit: Retrofit? = null
 
