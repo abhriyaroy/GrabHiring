@@ -3,8 +3,12 @@ package com.example.grabhiring.di
 import android.app.Application
 import android.content.Context
 import com.example.decathlonhiring.di.scopes.PerApplication
+import com.example.grabhiring.data.BackgroundScheduler
+import com.example.grabhiring.data.BackgroundSchedulerImpl
 import com.example.grabhiring.data.Repository
 import com.example.grabhiring.data.RepositoryImpl
+import com.example.grabhiring.data.api.NewsApiClientFactory
+import com.example.grabhiring.data.api.NewsApiCluentFactoryImpl
 import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
 import dagger.Module
@@ -23,6 +27,18 @@ class AppModule {
 
   @PerApplication
   @Provides
-  fun providesRepository(newsDataEntityMapper: NewsDataEntityMapper): Repository =
-    RepositoryImpl(newsDataEntityMapper)
+  fun providesNewsApiClientFactory(): NewsApiClientFactory = NewsApiCluentFactoryImpl()
+
+  @PerApplication
+  @Provides
+  fun providesBackgroundScheduler(): BackgroundScheduler = BackgroundSchedulerImpl()
+
+  @PerApplication
+  @Provides
+  fun providesRepository(
+    apiClientFactory: NewsApiClientFactory,
+    newsDataEntityMapper: NewsDataEntityMapper,
+    backgroundScheduler: BackgroundScheduler
+  ): Repository =
+    RepositoryImpl(apiClientFactory, newsDataEntityMapper, backgroundScheduler)
 }
