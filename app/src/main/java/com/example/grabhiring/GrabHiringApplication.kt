@@ -22,5 +22,4 @@ class GrabHiringApplication : Application(), HasActivityInjector {
 
   override fun activityInjector() = activityDispatchingAndroidInjector
 
-
 }
