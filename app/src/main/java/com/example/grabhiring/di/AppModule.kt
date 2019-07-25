@@ -9,6 +9,8 @@ import com.example.grabhiring.data.Repository
 import com.example.grabhiring.data.RepositoryImpl
 import com.example.grabhiring.data.api.NewsApiClientFactory
 import com.example.grabhiring.data.api.NewsApiClientFactoryImpl
+import com.example.grabhiring.data.database.DatabaseHelper
+import com.example.grabhiring.data.database.DatabaseHelperImpl
 import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
 import dagger.Module
@@ -35,10 +37,15 @@ class AppModule {
 
   @PerApplication
   @Provides
+  fun providesDatabaseHelper(): DatabaseHelper = DatabaseHelperImpl()
+
+  @PerApplication
+  @Provides
   fun providesRepository(
     apiClientFactory: NewsApiClientFactory,
+    databaseHelper: DatabaseHelper,
     newsDataEntityMapper: NewsDataEntityMapper,
     backgroundScheduler: BackgroundScheduler
   ): Repository =
-    RepositoryImpl(apiClientFactory, newsDataEntityMapper, backgroundScheduler)
+    RepositoryImpl(apiClientFactory, , databaseHelper, newsDataEntityMapper, backgroundScheduler)
 }
