@@ -1,20 +1,20 @@
 package com.example.grabhiring.data.api
 
-import com.example.grabhiring.data.model.NewsDataModel
+import com.example.grabhiring.data.model.NewsDataEntity
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 interface NewsApiClientFactory {
-  fun getNews(): Single<NewsDataModel>
+  fun getNews(): Single<NewsDataEntity>
 }
 
 class NewsApiCluentFactoryImpl : NewsApiClientFactory {
 
   private var retrofit: Retrofit? = null
 
-  override fun getNews(): Single<NewsDataModel> {
+  override fun getNews(): Single<NewsDataEntity> {
     if (retrofit == null) {
       retrofit = Retrofit.Builder()
         .baseUrl(UrlStore.NEWS_BASE_URL)

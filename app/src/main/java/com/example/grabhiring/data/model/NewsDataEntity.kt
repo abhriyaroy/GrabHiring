@@ -1,7 +1,7 @@
 package com.example.grabhiring.data.model
 
-data class NewsDataModel(
+data class NewsDataEntity(
   val status: String,
   val totalResults: Int,
-  val articles: ArrayList<ArticleDataModel>
+  val articles: ArrayList<ArticlesDataEntity>
 )

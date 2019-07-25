@@ -1,7 +1,7 @@
-package com.example.grabhiring.data.model
+package com.example.grabhiring.domain.model
 
-data class ArticleDataModel(
-  val source: SourceDataModel,
+data class ArticlesDomainModel(
+  val source: SourceDomainModel,
   val author: String,
   val title: String,
   val description: String,
