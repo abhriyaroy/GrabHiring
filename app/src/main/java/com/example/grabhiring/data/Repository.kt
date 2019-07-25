@@ -19,9 +19,6 @@ class RepositoryImpl(
 
   override fun getNews(): Single<NewsDomainModel> {
     return newsApiClientFactory.getNews()
-      .onErrorResumeNext {
-
-      }
       .map {
         mapper.mapFromDataEntity(it)
       }.subscribeOn(backgroundScheduler.getIoScheduler())

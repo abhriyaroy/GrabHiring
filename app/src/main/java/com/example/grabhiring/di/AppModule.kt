@@ -37,7 +37,7 @@ class AppModule {
 
   @PerApplication
   @Provides
-  fun providesDatabaseHelper(): DatabaseHelper = DatabaseHelperImpl()
+  fun providesDatabaseHelper(context: Context): DatabaseHelper = DatabaseHelperImpl(context)
 
   @PerApplication
   @Provides
@@ -47,5 +47,5 @@ class AppModule {
     newsDataEntityMapper: NewsDataEntityMapper,
     backgroundScheduler: BackgroundScheduler
   ): Repository =
-    RepositoryImpl(apiClientFactory, , databaseHelper, newsDataEntityMapper, backgroundScheduler)
+    RepositoryImpl(apiClientFactory, databaseHelper, newsDataEntityMapper, backgroundScheduler)
 }
