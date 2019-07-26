@@ -2,22 +2,63 @@ package com.example.grabhiring.data.database
 
 import android.content.Context
 import androidx.room.Room
+import com.example.grabhiring.data.database.dao.NewsDao
+import com.example.grabhiring.data.database.entity.NewsEntity
+import com.example.grabhiring.data.model.NewsDataEntity
+import com.example.grabhiring.exceptions.CacheAbsentException
+import io.reactivex.Completable
+import io.reactivex.Single
 
 interface DatabaseHelper {
-  fun getDatabase(): AppDatabase
+  fun saveToCache(newsDataEntity: NewsDataEntity): Single<Long>
+  fun getCachedNews(): Single<NewsDataEntity>
+  fun clearCache(): Completable
 }
 
-const val DATABASE_NAME = "AppDatabase.db"
+private const val DATABASE_NAME = "AppDatabase.db"
+private const val AUTO_INCREMENT_KEY = 0L
+private const val DEFAULT_LOCATION = "INDIA"
 
 class DatabaseHelperImpl(private val context: Context) : DatabaseHelper {
 
   private var databaseInstance: AppDatabase? = null
 
-  override fun getDatabase(): AppDatabase {
+  override fun saveToCache(newsDataEntity: NewsDataEntity): Single<Long> {
+    return Single.just(
+      getNewsDao().setCache(
+        NewsEntity(
+          AUTO_INCREMENT_KEY,
+          System.currentTimeMillis(),
+          DEFAULT_LOCATION,
+          newsDataEntity
+        )
+      )
+    )
+  }
+
+  override fun getCachedNews(): Single<NewsDataEntity> {
+    return getNewsDao().getCache()
+      .flatMap {
+        if (it.isEmpty()) {
+          Single.error(CacheAbsentException())
+        } else {
+          Single.just(it[0].data)
+        }
+      }
+  }
+
+  override fun clearCache(): Completable {
+    return Completable.create {
+      getNewsDao().deleteAllCache()
+      it.onComplete()
+    }
+  }
+
+  private fun getNewsDao(): NewsDao {
     if (databaseInstance == null) {
       databaseInstance =
         Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
     }
-    return databaseInstance!!
+    return databaseInstance!!.newsDao()
   }
 }

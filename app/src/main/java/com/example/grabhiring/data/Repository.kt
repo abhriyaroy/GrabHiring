@@ -19,8 +19,18 @@ class RepositoryImpl(
 
   override fun getNews(): Single<NewsDomainModel> {
     return newsApiClientFactory.getNews()
+      .map { newsDataEntity ->
+        databaseHelper.getNewsDao().let {
+          it.deleteAllCache()
+          it.saveCache(newsDataEntity)
+        }
+      }.flatMap {
+        databaseHelper.getNewsDao().newsDao()
+          .getCache()
+      }
       .map {
-        mapper.mapFromDataEntity(it)
-      }.subscribeOn(backgroundScheduler.getIoScheduler())
+        mapper.mapFromDataEntity(it[0].data)
+      }
+      .subscribeOn(backgroundScheduler.getIoScheduler())
   }
 }
