@@ -10,7 +10,7 @@ interface MainContract {
     fun setNewsList(newsPresenterEntity: NewsPresenterEntity)
   }
 
-  interface MainPreseter : BasePresenter<MainView> {
+  interface MainPresenter : BasePresenter<MainView> {
     fun decorateView()
   }
 }
