@@ -2,7 +2,7 @@ package com.example.grabhiring.di
 
 import android.app.Application
 import com.example.decathlonhiring.di.scopes.PerApplication
-import com.example.grabhiring.GrabHiringApplication
+import com.example.grabhiring.ui.GrabHiringApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

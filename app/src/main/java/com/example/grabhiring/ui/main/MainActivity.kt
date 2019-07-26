@@ -1,10 +1,10 @@
-package com.example.grabhiring
+package com.example.grabhiring.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.grabhiring.R
 import com.example.grabhiring.data.Repository
 import dagger.android.AndroidInjection
-import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -16,9 +16,5 @@ class MainActivity : AppCompatActivity() {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
-    repository.getNews()
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe({ println("sudususususus")}, {})
   }
 }

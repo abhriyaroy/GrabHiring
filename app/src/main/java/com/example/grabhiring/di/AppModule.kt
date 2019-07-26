@@ -13,6 +13,8 @@ import com.example.grabhiring.data.database.DatabaseHelper
 import com.example.grabhiring.data.database.DatabaseHelperImpl
 import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
+import com.example.grabhiring.domain.main.NewsInteractor
+import com.example.grabhiring.domain.main.NewsUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -48,4 +50,8 @@ class AppModule {
     backgroundScheduler: BackgroundScheduler
   ): Repository =
     RepositoryImpl(apiClientFactory, databaseHelper, newsDataEntityMapper, backgroundScheduler)
+
+  @PerApplication
+  @Provides
+  fun providesNewsUseCase(repository: Repository): NewsUseCase = NewsInteractor(repository)
 }
