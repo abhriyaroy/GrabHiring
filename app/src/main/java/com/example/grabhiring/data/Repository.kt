@@ -4,6 +4,7 @@ import com.example.grabhiring.data.api.NewsApiClientFactory
 import com.example.grabhiring.data.database.DatabaseHelper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.domain.model.NewsDomainModel
+import com.example.grabhiring.exceptions.CacheAbsentException
 import io.reactivex.Single
 
 interface Repository {
@@ -20,16 +21,19 @@ class RepositoryImpl(
   override fun getNews(): Single<NewsDomainModel> {
     return newsApiClientFactory.getNews()
       .map { newsDataEntity ->
-        databaseHelper.getNewsDao().let {
-          it.deleteAllCache()
-          it.saveCache(newsDataEntity)
-        }
+        databaseHelper.clearCache()
+        databaseHelper.saveToCache(newsDataEntity)
       }.flatMap {
-        databaseHelper.getNewsDao().newsDao()
-          .getCache()
+        databaseHelper.getCachedNews()
+      }.onErrorResumeNext {
+        if (it is CacheAbsentException) {
+          Single.error(it)
+        } else {
+          databaseHelper.getCachedNews()
+        }
       }
       .map {
-        mapper.mapFromDataEntity(it[0].data)
+        mapper.mapFromDataEntity(it)
       }
       .subscribeOn(backgroundScheduler.getIoScheduler())
   }

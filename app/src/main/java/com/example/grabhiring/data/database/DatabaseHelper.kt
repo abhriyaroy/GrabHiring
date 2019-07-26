@@ -6,13 +6,12 @@ import com.example.grabhiring.data.database.dao.NewsDao
 import com.example.grabhiring.data.database.entity.NewsEntity
 import com.example.grabhiring.data.model.NewsDataEntity
 import com.example.grabhiring.exceptions.CacheAbsentException
-import io.reactivex.Completable
 import io.reactivex.Single
 
 interface DatabaseHelper {
   fun saveToCache(newsDataEntity: NewsDataEntity): Single<Long>
   fun getCachedNews(): Single<NewsDataEntity>
-  fun clearCache(): Completable
+  fun clearCache()
 }
 
 private const val DATABASE_NAME = "AppDatabase.db"
@@ -47,11 +46,8 @@ class DatabaseHelperImpl(private val context: Context) : DatabaseHelper {
       }
   }
 
-  override fun clearCache(): Completable {
-    return Completable.create {
-      getNewsDao().deleteAllCache()
-      it.onComplete()
-    }
+  override fun clearCache() {
+    getNewsDao().deleteAllCache()
   }
 
   private fun getNewsDao(): NewsDao {
