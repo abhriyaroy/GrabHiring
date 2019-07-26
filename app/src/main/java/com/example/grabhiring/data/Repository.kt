@@ -6,6 +6,7 @@ import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.domain.model.NewsDomainModel
 import com.example.grabhiring.exceptions.CacheAbsentException
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 interface Repository {
   fun getNews(): Single<NewsDomainModel>
@@ -20,6 +21,7 @@ class RepositoryImpl(
 
   override fun getNews(): Single<NewsDomainModel> {
     return newsApiClientFactory.getNews()
+      .timeout(TimeUnit.SECONDS.toMillis(10), TimeUnit.SECONDS)
       .map { newsDataEntity ->
         databaseHelper.clearCache()
         databaseHelper.saveToCache(newsDataEntity)

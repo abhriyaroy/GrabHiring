@@ -1,5 +1,7 @@
 package com.example.grabhiring.presenter
 
+import com.uber.autodispose.ScopeProvider
+
 interface BaseView {
-  fun getScope()
+  fun getScope(): ScopeProvider
 }
