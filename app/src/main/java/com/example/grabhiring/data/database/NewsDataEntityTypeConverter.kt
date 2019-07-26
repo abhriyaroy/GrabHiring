@@ -1,4 +1,4 @@
-package com.example.grabhiring.data.database.entity
+package com.example.grabhiring.data.database
 
 import androidx.room.TypeConverter
 import com.example.grabhiring.data.model.NewsDataEntity
