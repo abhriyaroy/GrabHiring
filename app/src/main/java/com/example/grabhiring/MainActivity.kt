@@ -6,7 +6,6 @@ import com.example.grabhiring.data.api.NewsApiClientFactory
 import com.example.grabhiring.data.database.DatabaseHelper
 import com.example.grabhiring.data.database.entity.NewsEntity
 import dagger.android.AndroidInjection
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,11 +24,11 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     newsApiClientFactory.getNews()
-      .flatMap {
+      .map {
+        databaseHelper.getDatabase().newsDao().deleteAllCache()
         databaseHelper.getDatabase()
           .newsDao()
           .saveCache(NewsEntity(0, System.currentTimeMillis(), "INDIA", it))
-        Single.just("asdf")
       }.flatMap {
         databaseHelper.getDatabase().newsDao()
           .getCache()

@@ -15,7 +15,7 @@ const val DELETE_ALL_QUERY = "Delete from $TABLE_NAME"
 interface NewsDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun saveCache(newsEntity: NewsEntity)
+  fun saveCache(newsEntity: NewsEntity): Long
 
   @Query(RETRIEVE_ALL_DATA_QUERY)
   fun getCache(): Single<List<NewsEntity>>
