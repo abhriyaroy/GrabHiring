@@ -26,6 +26,7 @@ class RepositoryImpl(
         databaseHelper.clearCache()
         databaseHelper.saveToCache(newsDataEntity)
       }.flatMap {
+        println("getcache called")
         databaseHelper.getCachedNews()
       }.onErrorResumeNext {
         if (it is CacheAbsentException) {
@@ -35,6 +36,8 @@ class RepositoryImpl(
         }
       }
       .map {
+        println(it.articles[0].source.id)
+        println(it.articles[0].source.name)
         mapper.mapFromDataEntity(it)
       }
       .subscribeOn(backgroundScheduler.getIoScheduler())

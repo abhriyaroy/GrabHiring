@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListPresenter
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListView
-import com.example.grabhiring.presenter.main.model.ArticlesPresenterEntity
+import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
 import kotlinx.android.synthetic.main.item_news_list.view.*
 
 class NewsListAdapter(private val newsListPresenter: NewsListPresenter) :

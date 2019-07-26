@@ -1,7 +1,6 @@
 package com.example.grabhiring.presenter.adapter
 
-import com.example.grabhiring.presenter.main.model.ArticlesPresenterEntity
-import com.example.grabhiring.presenter.main.model.NewsPresenterEntity
+import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
 
 interface NewsListContract {
 

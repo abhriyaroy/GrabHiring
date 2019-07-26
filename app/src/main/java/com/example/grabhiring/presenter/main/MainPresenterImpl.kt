@@ -3,11 +3,13 @@ package com.example.grabhiring.presenter.main
 import com.example.grabhiring.domain.main.NewsUseCase
 import com.example.grabhiring.presenter.main.MainContract.MainPresenter
 import com.example.grabhiring.presenter.main.MainContract.MainView
+import com.example.grabhiring.presenter.mapper.NewsPresenterEntityMapper
 import com.example.grabhiring.ui.MainScheduler
 import com.uber.autodispose.autoDisposable
 
 class MainPresenterImpl(
   private val newsUseCase: NewsUseCase,
+  private val newsPresenterEntityMapper: NewsPresenterEntityMapper,
   private val mainScheduler: MainScheduler
 ) : MainPresenter {
 
@@ -23,13 +25,17 @@ class MainPresenterImpl(
 
   override fun decorateView() {
     newsUseCase.getNews()
-      .flatMap {
-
+      .map {
+        println("asjkfsdkjafbjksdnfkjs")
+        it
+      }
+      .map {
+        newsPresenterEntityMapper.mapToPresenterEntity(it)
       }
       .observeOn(mainScheduler.getMainScheduler())
-      .autoDisposable(mainView!!.getScope())
+      //.autoDisposable(mainView!!.getScope())
       .subscribe({
         mainView?.setNewsList(it)
-      },{})
+      }, { println(it.message)})
   }
 }

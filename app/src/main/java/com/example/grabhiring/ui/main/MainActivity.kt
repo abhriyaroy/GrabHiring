@@ -2,14 +2,14 @@ package com.example.grabhiring.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListPresenter
 import com.example.grabhiring.presenter.main.MainContract.MainPresenter
 import com.example.grabhiring.presenter.main.MainContract.MainView
-import com.example.grabhiring.presenter.main.model.NewsPresenterEntity
+import com.example.grabhiring.presenter.model.NewsPresenterEntity
 import com.example.grabhiring.ui.adapter.NewsListAdapter
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.AndroidInjection
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), MainView {
     setContentView(R.layout.activity_main)
     presenter.attachView(this)
     initRecyclerView()
+    presenter.decorateView()
   }
 
   override fun onDestroy() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), MainView {
   }
 
   override fun getScope(): AndroidLifecycleScopeProvider =
-    AndroidLifecycleScopeProvider.from(this.lifecycle, Lifecycle.Event.ON_DESTROY)
+    AndroidLifecycleScopeProvider.from(this.lifecycle, ON_DESTROY)
 
   override fun setNewsList(newsPresenterEntity: NewsPresenterEntity) {
     recyclerViewAdapter.setList(newsPresenterEntity.articles)

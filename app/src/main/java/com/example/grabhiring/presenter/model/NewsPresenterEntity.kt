@@ -1,4 +1,4 @@
-package com.example.grabhiring.presenter.main.model
+package com.example.grabhiring.presenter.model
 
 data class NewsPresenterEntity(
   val status: String,

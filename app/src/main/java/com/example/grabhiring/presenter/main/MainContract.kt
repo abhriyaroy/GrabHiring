@@ -2,7 +2,7 @@ package com.example.grabhiring.presenter.main
 
 import com.example.grabhiring.presenter.BasePresenter
 import com.example.grabhiring.presenter.BaseView
-import com.example.grabhiring.presenter.main.model.NewsPresenterEntity
+import com.example.grabhiring.presenter.model.NewsPresenterEntity
 
 interface MainContract {
 

@@ -15,6 +15,8 @@ import com.example.grabhiring.data.mapper.NewsDataEntityMapper
 import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
 import com.example.grabhiring.domain.main.NewsInteractor
 import com.example.grabhiring.domain.main.NewsUseCase
+import com.example.grabhiring.ui.MainScheduler
+import com.example.grabhiring.ui.MainSchedulerImpl
 import dagger.Module
 import dagger.Provides
 
@@ -36,6 +38,10 @@ class AppModule {
   @PerApplication
   @Provides
   fun providesBackgroundScheduler(): BackgroundScheduler = BackgroundSchedulerImpl()
+
+  @PerApplication
+  @Provides
+  fun providesMainScheduler(): MainScheduler = MainSchedulerImpl()
 
   @PerApplication
   @Provides

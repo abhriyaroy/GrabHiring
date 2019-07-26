@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -42,10 +46,10 @@ dependencies {
     // Rx android
     implementation "io.reactivex.rxjava2:rxandroid:$RX_ANDROID_VERSION"
     // Autodispose
-    implementation "com.uber.autodispose:autodispose-ktx:$AUTODISPOSE_VERSION"
-    implementation "com.uber.autodispose:autodispose-android-ktx:$AUTODISPOSE_VERSION"
-    implementation "com.uber.autodispose:autodispose-android-archcomponents-ktx:$AUTODISPOSE_VERSION"
-    implementation "com.uber.autodispose:autodispose-android-archcomponents-test-ktx:$AUTODISPOSE_VERSION"
+    implementation "com.uber.autodispose:autodispose:$AUTODISPOSE_VERSION"
+    implementation "com.uber.autodispose:autodispose-android:$AUTODISPOSE_VERSION"
+    implementation "com.uber.autodispose:autodispose-android-archcomponents:$AUTODISPOSE_VERSION"
+    implementation "com.uber.autodispose:autodispose-android-archcomponents-test:$AUTODISPOSE_VERSION"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
