@@ -4,6 +4,7 @@ import com.example.grabhiring.domain.main.NewsUseCase
 import com.example.grabhiring.presenter.main.MainContract.MainPresenter
 import com.example.grabhiring.presenter.main.MainContract.MainView
 import com.example.grabhiring.ui.MainScheduler
+import com.uber.autodispose.autoDisposable
 
 class MainPresenterImpl(
   private val newsUseCase: NewsUseCase,
@@ -22,5 +23,13 @@ class MainPresenterImpl(
 
   override fun decorateView() {
     newsUseCase.getNews()
+      .flatMap {
+
+      }
+      .observeOn(mainScheduler.getMainScheduler())
+      .autoDisposable(mainView!!.getScope())
+      .subscribe({
+        mainView?.setNewsList(it)
+      },{})
   }
 }

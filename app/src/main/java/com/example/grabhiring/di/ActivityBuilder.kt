@@ -1,6 +1,7 @@
 package com.example.grabhiring.di
 
 import com.example.decathlonhiring.di.scopes.PerActivity
+import com.example.grabhiring.ui.adapter.NewsListAdapterModule
 import com.example.grabhiring.ui.main.MainActivity
 import com.example.grabhiring.ui.main.MainModule
 import dagger.Module
@@ -10,7 +11,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
 
   @PerActivity
-  @ContributesAndroidInjector(modules = [(MainModule::class)])
+  @ContributesAndroidInjector(modules = [(MainModule::class), (NewsListAdapterModule::class)])
   abstract fun contributesMainActivityInjector(): MainActivity
 
 }

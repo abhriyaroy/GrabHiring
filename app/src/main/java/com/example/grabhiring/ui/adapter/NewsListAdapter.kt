@@ -14,18 +14,29 @@ import kotlinx.android.synthetic.main.item_news_list.view.*
 class NewsListAdapter(private val newsListPresenter: NewsListPresenter) :
   Adapter<NewsListViewHolder>() {
 
-  private val articlesList = mutableListOf<ArticlesPresenterEntity>()
+  private var articlesList = listOf<ArticlesPresenterEntity>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
-    return NewsListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_news_list, parent, false))
+    return NewsListViewHolder(
+      LayoutInflater.from(parent.context).inflate(
+        R.layout.item_news_list,
+        parent,
+        false
+      )
+    )
   }
 
   override fun getItemCount(): Int {
-    return newsListPresenter.getItemCount(articlesList.toList())
+    return newsListPresenter.getItemCount(articlesList)
   }
 
   override fun onBindViewHolder(holder: NewsListViewHolder, position: Int) {
     newsListPresenter.onBindRepositoryRowViewAtPosition(holder, articlesList, position)
+  }
+
+  fun setList(list: List<ArticlesPresenterEntity>) {
+    articlesList = list
+    notifyDataSetChanged()
   }
 
 }
