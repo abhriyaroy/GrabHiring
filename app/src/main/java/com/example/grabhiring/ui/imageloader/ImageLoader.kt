@@ -8,11 +8,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.bumptech.glide.request.RequestOptions
 
 interface ImageLoader {
-  fun loadImage(imageView: ImageView, imageUrl: String)
+  fun loadImage(imageView: ImageView, imageUrl: String?)
 }
 
 class ImageLoaderImpl(private val context: Context) : ImageLoader {
-  override fun loadImage(imageView: ImageView, imageUrl: String) {
+  override fun loadImage(imageView: ImageView, imageUrl: String?) {
     Glide.with(context)
       .load(imageUrl)
       .transition(withCrossFade())

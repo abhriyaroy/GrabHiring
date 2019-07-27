@@ -7,6 +7,8 @@ import com.example.grabhiring.presenter.model.NewsPresenterEntity
 interface MainContract {
 
   interface MainView : BaseView {
+    fun showProgressLoader()
+    fun hideProgressLoader()
     fun setNewsList(newsPresenterEntity: NewsPresenterEntity)
   }
 

@@ -48,15 +48,15 @@ class NewsListAdapter(
 
 class NewsListViewHolder(itemView: View, private val imageLoader: ImageLoader) :
   RecyclerView.ViewHolder(itemView), NewsListView {
-  override fun showHeadline(headLine: String) {
+  override fun showHeadline(headLine: String?) {
     itemView.headline.text = headLine
   }
 
-  override fun showDescription(description: String) {
+  override fun showDescription(description: String?) {
     itemView.description.text = description
   }
 
-  override fun showImage(imagePath: String) {
+  override fun showImage(imagePath: String?) {
     imageLoader.loadImage(itemView.imageView, imagePath)
   }
 

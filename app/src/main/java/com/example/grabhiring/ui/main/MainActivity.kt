@@ -1,6 +1,8 @@
 package com.example.grabhiring.ui.main
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
@@ -45,6 +47,14 @@ class MainActivity : AppCompatActivity(), MainView {
 
   override fun getScope(): AndroidLifecycleScopeProvider =
     AndroidLifecycleScopeProvider.from(this.lifecycle, ON_DESTROY)
+
+  override fun hideProgressLoader() {
+    progressCircle.visibility = GONE
+  }
+
+  override fun showProgressLoader() {
+    progressCircle.visibility = VISIBLE
+  }
 
   override fun setNewsList(newsPresenterEntity: NewsPresenterEntity) {
     recyclerViewAdapter.setList(newsPresenterEntity.articles)
