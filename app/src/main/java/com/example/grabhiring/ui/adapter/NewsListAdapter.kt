@@ -1,18 +1,22 @@
 package com.example.grabhiring.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.bumptech.glide.Glide
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListPresenter
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListView
 import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
 import kotlinx.android.synthetic.main.item_news_list.view.*
 
-class NewsListAdapter(private val newsListPresenter: NewsListPresenter) :
-  Adapter<NewsListViewHolder>() {
+class NewsListAdapter(
+  private val context: Context,
+  private val newsListPresenter: NewsListPresenter
+) : Adapter<NewsListViewHolder>() {
 
   private var articlesList = listOf<ArticlesPresenterEntity>()
 
@@ -22,7 +26,7 @@ class NewsListAdapter(private val newsListPresenter: NewsListPresenter) :
         R.layout.item_news_list,
         parent,
         false
-      )
+      ), context
     )
   }
 
@@ -41,7 +45,8 @@ class NewsListAdapter(private val newsListPresenter: NewsListPresenter) :
 
 }
 
-class NewsListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), NewsListView {
+class NewsListViewHolder(itemView: View, private val context: Context) :
+  RecyclerView.ViewHolder(itemView), NewsListView {
   override fun showHeadline(headLine: String) {
     itemView.headline.text = headLine
   }
@@ -51,7 +56,9 @@ class NewsListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Ne
   }
 
   override fun showImage(imagePath: String) {
-
+    Glide.with(context)
+      .load(imagePath)
+      .into(itemView.imageView)
   }
 
 }

@@ -18,7 +18,7 @@ class NewsListPresenterImpl : NewsListPresenter {
     with(articlesList[position]) {
       newsListView.showHeadline(title)
       newsListView.showDescription(description)
-      newsListView.showDescription(urlToImage)
+      newsListView.showImage(urlToImage)
     }
   }
 

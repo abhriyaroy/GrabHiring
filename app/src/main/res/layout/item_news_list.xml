@@ -5,6 +5,10 @@
   android:id="@+id/itemConstraintLayout"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  android:layout_margin="8dp"
+  android:clickable="true"
+  android:focusable="true"
+  android:foreground="?android:attr/selectableItemBackground"
   android:orientation="vertical">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +18,7 @@
 
     <TextView
       android:id="@+id/headline"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginEnd="8dp"
       android:layout_marginLeft="24dp"
@@ -31,7 +35,7 @@
 
     <TextView
       android:id="@+id/description"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginEnd="32dp"
       android:layout_marginRight="32dp"
@@ -48,8 +52,8 @@
 
     <ImageView
       android:id="@+id/imageView"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
       android:layout_marginBottom="24dp"
       android:layout_marginEnd="24dp"
       android:layout_marginRight="24dp"

@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
   private fun initRecyclerView() {
     recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-    recyclerViewAdapter = NewsListAdapter(newListPresenter)
+    recyclerViewAdapter = NewsListAdapter(this, newListPresenter)
     recyclerView.adapter = recyclerViewAdapter
   }
 }
