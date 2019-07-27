@@ -46,7 +46,7 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
   }
 
   override fun showNewsHeadline(headline: String) {
-    toolbar.title = headline
+    supportActionBar?.title = headline
   }
 
   override fun showNewsDetails(url: String) {

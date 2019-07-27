@@ -31,6 +31,7 @@ dependencies {
   // Core
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
   implementation "androidx.appcompat:appcompat:$SUPPORT_LIBRARY_VERSION"
+  implementation "com.google.android.material:material:$MATERIAL_DESIGN_VERSION"
   implementation "androidx.core:core-ktx:$CORE_KTX_VERSION"
   implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
   implementation "androidx.recyclerview:recyclerview:$RECYCLER_VIEW_VERSION"
