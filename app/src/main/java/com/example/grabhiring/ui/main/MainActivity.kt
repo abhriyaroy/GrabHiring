@@ -1,8 +1,8 @@
 package com.example.grabhiring.ui.main
 
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.Menu
+import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
@@ -15,11 +15,13 @@ import com.example.grabhiring.presenter.main.MainContract.MainView
 import com.example.grabhiring.presenter.model.NewsPresenterEntity
 import com.example.grabhiring.ui.adapter.NewsListAdapter
 import com.example.grabhiring.ui.imageloader.ImageLoader
+import com.example.grabhiring.ui.utils.gone
+import com.example.grabhiring.ui.utils.showToast
+import com.example.grabhiring.ui.utils.visible
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -41,20 +43,35 @@ class MainActivity : AppCompatActivity(), MainView {
     presenter.decorateView()
   }
 
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.refresh_menu, menu)
+    return true
+  }
+
   override fun onDestroy() {
     presenter.detachView()
     super.onDestroy()
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when (item.itemId) {
+      R.id.refreshNews -> {
+        presenter.handleRefreshClick()
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
+    }
   }
 
   override fun getScope(): AndroidLifecycleScopeProvider =
     AndroidLifecycleScopeProvider.from(this.lifecycle, ON_DESTROY)
 
   override fun hideProgressLoader() {
-    progressCircle.visibility = GONE
+    progressCircle.gone()
   }
 
   override fun showProgressLoader() {
-    progressCircle.visibility = VISIBLE
+    progressCircle.visible()
   }
 
   override fun setNewsList(newsPresenterEntity: NewsPresenterEntity) {
@@ -62,7 +79,19 @@ class MainActivity : AppCompatActivity(), MainView {
     recyclerView.scheduleLayoutAnimation()
   }
 
-  private fun initToolbar(){
+  override fun showNewsList() {
+    recyclerView.visible()
+  }
+
+  override fun hideNewsList() {
+    recyclerView.gone()
+  }
+
+  override fun showErrorMessage() {
+    showToast("Ooops....something is not right!")
+  }
+
+  private fun initToolbar() {
     toolbar.title = "Breaking News"
     setSupportActionBar(toolbar)
   }

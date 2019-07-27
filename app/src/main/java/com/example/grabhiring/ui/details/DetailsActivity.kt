@@ -7,13 +7,15 @@ import android.view.View.VISIBLE
 import android.webkit.WebSettings.LOAD_DEFAULT
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.details.DetailsContract.DetailsPresenter
 import com.example.grabhiring.presenter.details.DetailsContract.DetailsView
 import com.example.grabhiring.ui.adapter.NEWS_HEADING
 import com.example.grabhiring.ui.adapter.NEWS_URL
+import com.example.grabhiring.ui.utils.gone
+import com.example.grabhiring.ui.utils.showToast
+import com.example.grabhiring.ui.utils.visible
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
@@ -54,15 +56,15 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
   }
 
   override fun showDetailsUrlErrorMessage() {
-    Toast.makeText(this, "Couldn't load news details", Toast.LENGTH_SHORT).show()
+    showToast("Couldn't load news details")
   }
 
   override fun showWaitLoader() {
-    progressCircle.visibility = VISIBLE
+    progressCircle.visible()
   }
 
   override fun hideWaitLoader() {
-    progressCircle.visibility = GONE
+    progressCircle.gone()
   }
 
   override fun exitView() {

@@ -10,9 +10,13 @@ interface MainContract {
     fun showProgressLoader()
     fun hideProgressLoader()
     fun setNewsList(newsPresenterEntity: NewsPresenterEntity)
+    fun showNewsList()
+    fun hideNewsList()
+    fun showErrorMessage()
   }
 
   interface MainPresenter : BasePresenter<MainView> {
     fun decorateView()
+    fun handleRefreshClick()
   }
 }

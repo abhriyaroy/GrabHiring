@@ -23,6 +23,14 @@ class MainPresenterImpl(
   }
 
   override fun decorateView() {
+    showLatestNews()
+  }
+
+  override fun handleRefreshClick() {
+    showLatestNews()
+  }
+
+  private fun showLatestNews() {
     newsUseCase.getNews()
       .map {
         newsPresenterEntityMapper.mapToPresenterEntity(it)
@@ -30,13 +38,15 @@ class MainPresenterImpl(
       .observeOn(mainScheduler.getMainScheduler())
       //.autoDisposable(mainView!!.getScope())
       .doOnSubscribe {
+        mainView?.hideNewsList()
         mainView?.showProgressLoader()
       }
       .subscribe({
         mainView?.hideProgressLoader()
+        mainView?.showNewsList()
         mainView?.setNewsList(it)
       }, {
-        println(it.message)
+        mainView?.showErrorMessage()
         mainView?.hideProgressLoader()
       })
   }
