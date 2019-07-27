@@ -2,6 +2,7 @@ package com.example.grabhiring.ui.details
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.grabhiring.R
 
 class DetailsActivity : AppCompatActivity() {
 

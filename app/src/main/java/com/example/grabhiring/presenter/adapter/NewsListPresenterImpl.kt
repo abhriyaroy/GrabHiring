@@ -6,7 +6,10 @@ import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
 
 class NewsListPresenterImpl : NewsListPresenter {
 
+  private var list = listOf<ArticlesPresenterEntity>()
+
   override fun getItemCount(list: List<ArticlesPresenterEntity>): Int {
+    this.list = list
     return list.size
   }
 
@@ -19,6 +22,13 @@ class NewsListPresenterImpl : NewsListPresenter {
       newsListView.showHeadline(title)
       newsListView.showDescription(description)
       newsListView.showImage(urlToImage)
+    }
+    newsListView.attachClickListener()
+  }
+
+  override fun handleItemClick(newsListView: NewsListView, position: Int) {
+    with(list[position]) {
+      newsListView.expandImage(title, url)
     }
   }
 
