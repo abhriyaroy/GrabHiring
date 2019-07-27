@@ -5,7 +5,7 @@
   android:id="@+id/itemConstraintLayout"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_margin="8dp"
+  android:layout_margin="@dimen/news_list_item_margin"
   android:clickable="true"
   android:focusable="true"
   android:foreground="?android:attr/selectableItemBackground"
@@ -15,15 +15,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <TextView
       android:id="@+id/headline"
-      android:layout_width="0dp"
+      android:layout_width="@dimen/news_list_item_headline_text_width"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="24dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="24dp"
+      android:layout_marginEnd="@dimen/news_list_item_headline_margin_end"
+      android:layout_marginLeft="@dimen/news_list_item_headline_margin_left"
+      android:layout_marginRight="@dimen/news_list_item_headline_margin_right"
+      android:layout_marginStart="@dimen/news_list_item_headline_margin_start"
       android:ellipsize="end"
       android:maxLines="2"
       android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -35,11 +34,11 @@
 
     <TextView
       android:id="@+id/description"
-      android:layout_width="0dp"
+      android:layout_width="@dimen/news_list_item_headline_description_width"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="32dp"
-      android:layout_marginRight="32dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginEnd="@dimen/news_list_item_headline_description_margin_end"
+      android:layout_marginRight="@dimen/news_list_item_headline_description_margin_right"
+      android:layout_marginTop="@dimen/news_list_item_headline_description_margin_top"
       android:ellipsize="end"
       android:maxLines="3"
       app:layout_constraintBottom_toBottomOf="@id/imageView"
@@ -51,16 +50,17 @@
 
     <ImageView
       android:id="@+id/imageView"
-      android:layout_width="90dp"
-      android:layout_height="90dp"
-      android:layout_marginBottom="24dp"
-      android:layout_marginEnd="24dp"
-      android:layout_marginRight="24dp"
-      android:layout_marginTop="24dp"
+      android:layout_width="@dimen/news_list_item_imageview_width"
+      android:layout_height="@dimen/news_list_item_imageview_height"
+      android:layout_marginBottom="@dimen/news_list_item_imageview_margin_bottom"
+      android:layout_marginEnd="@dimen/news_list_item_imageview_margin_end"
+      android:layout_marginRight="@dimen/news_list_item_imageview_margin_right"
+      android:layout_marginTop="@dimen/news_list_item_imageview_margin_top"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
