@@ -15,7 +15,9 @@ class DetailsPresenterImpl : DetailsPresenter {
     detailsView = null
   }
 
-  override fun decorateView(heading: String, url: String) {
-
+  override fun decorateView(heading: String?, url: String?) {
+    if (url!=null){
+      detailsView?.showNewsDetails(url)
+    }
   }
 }

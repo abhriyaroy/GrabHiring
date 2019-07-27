@@ -4,11 +4,12 @@ import com.example.grabhiring.presenter.BasePresenter
 
 interface DetailsContract {
   interface DetailsView {
-    fun loadNewsDetails(url: String)
+    fun showNewsHeadline(headline: String)
+    fun showNewsDetails(url: String)
     fun showDetailsUrlErrorMessage()
   }
 
   interface DetailsPresenter : BasePresenter<DetailsView> {
-    fun decorateView(heading: String, url: String)
+    fun decorateView(heading: String?, url: String?)
   }
 }
