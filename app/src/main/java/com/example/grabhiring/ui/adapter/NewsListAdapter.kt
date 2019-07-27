@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListPresenter
 import com.example.grabhiring.presenter.adapter.NewsListContract.NewsListView
 import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
+import com.example.grabhiring.ui.imageloader.ImageLoader
 import kotlinx.android.synthetic.main.item_news_list.view.*
 
 class NewsListAdapter(
   private val context: Context,
+  private val imageLoader: ImageLoader,
   private val newsListPresenter: NewsListPresenter
 ) : Adapter<NewsListViewHolder>() {
 
@@ -26,7 +27,7 @@ class NewsListAdapter(
         R.layout.item_news_list,
         parent,
         false
-      ), context
+      ), imageLoader
     )
   }
 
@@ -45,7 +46,7 @@ class NewsListAdapter(
 
 }
 
-class NewsListViewHolder(itemView: View, private val context: Context) :
+class NewsListViewHolder(itemView: View, private val imageLoader: ImageLoader) :
   RecyclerView.ViewHolder(itemView), NewsListView {
   override fun showHeadline(headLine: String) {
     itemView.headline.text = headLine
@@ -56,9 +57,7 @@ class NewsListViewHolder(itemView: View, private val context: Context) :
   }
 
   override fun showImage(imagePath: String) {
-    Glide.with(context)
-      .load(imagePath)
-      .into(itemView.imageView)
+    imageLoader.loadImage(itemView.imageView, imagePath)
   }
 
 }
