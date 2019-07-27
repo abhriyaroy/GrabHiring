@@ -2,7 +2,7 @@ package com.example.grabhiring.presenter.model
 
 data class ArticlesPresenterEntity(
   val source: SourcePresenterEntity,
-  val author: String,
+  val author: String?,
   val title: String,
   val description: String,
   val url: String,

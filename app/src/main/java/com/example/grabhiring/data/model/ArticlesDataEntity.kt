@@ -2,7 +2,7 @@ package com.example.grabhiring.data.model
 
 data class ArticlesDataEntity(
   val source: SourceDataEntity,
-  val author: String,
+  val author: String?,
   val title: String,
   val description: String,
   val url: String,

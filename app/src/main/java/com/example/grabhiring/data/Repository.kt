@@ -26,7 +26,6 @@ class RepositoryImpl(
         databaseHelper.clearCache()
         databaseHelper.saveToCache(newsDataEntity)
       }.flatMap {
-        println("getcache called")
         databaseHelper.getCachedNews()
       }.onErrorResumeNext {
         if (it is CacheAbsentException) {

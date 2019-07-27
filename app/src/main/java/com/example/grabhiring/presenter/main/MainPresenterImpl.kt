@@ -26,10 +26,6 @@ class MainPresenterImpl(
   override fun decorateView() {
     newsUseCase.getNews()
       .map {
-        println("asjkfsdkjafbjksdnfkjs")
-        it
-      }
-      .map {
         newsPresenterEntityMapper.mapToPresenterEntity(it)
       }
       .observeOn(mainScheduler.getMainScheduler())
