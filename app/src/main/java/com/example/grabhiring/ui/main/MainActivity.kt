@@ -18,6 +18,7 @@ import com.example.grabhiring.ui.imageloader.ImageLoader
 import com.example.grabhiring.ui.utils.gone
 import com.example.grabhiring.ui.utils.showToast
 import com.example.grabhiring.ui.utils.visible
+import com.uber.autodispose.ScopeProvider
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
@@ -63,8 +64,8 @@ class MainActivity : AppCompatActivity(), MainView {
     }
   }
 
-  override fun getScope(): AndroidLifecycleScopeProvider =
-    AndroidLifecycleScopeProvider.from(this.lifecycle, ON_DESTROY)
+  override fun getScope(): ScopeProvider =
+    AndroidLifecycleScopeProvider.from(this, ON_DESTROY)
 
   override fun hideProgressLoader() {
     progressCircle.gone()

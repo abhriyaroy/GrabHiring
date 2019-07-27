@@ -5,6 +5,7 @@ import com.example.grabhiring.presenter.main.MainContract.MainPresenter
 import com.example.grabhiring.presenter.main.MainContract.MainView
 import com.example.grabhiring.presenter.mapper.NewsPresenterEntityMapper
 import com.example.grabhiring.ui.MainScheduler
+import com.uber.autodispose.AutoDispose.autoDisposable
 
 class MainPresenterImpl(
   private val newsUseCase: NewsUseCase,
@@ -36,11 +37,11 @@ class MainPresenterImpl(
         newsPresenterEntityMapper.mapToPresenterEntity(it)
       }
       .observeOn(mainScheduler.getMainScheduler())
-      //.autoDisposable(mainView!!.getScope())
       .doOnSubscribe {
         mainView?.hideNewsList()
         mainView?.showProgressLoader()
       }
+      .`as`(autoDisposable(mainView!!.getScope()))
       .subscribe({
         mainView?.hideProgressLoader()
         mainView?.showNewsList()
