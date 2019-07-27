@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), MainView {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     presenter.attachView(this)
+    initToolbar()
     initRecyclerView()
     presenter.decorateView()
   }
@@ -59,6 +60,11 @@ class MainActivity : AppCompatActivity(), MainView {
   override fun setNewsList(newsPresenterEntity: NewsPresenterEntity) {
     recyclerViewAdapter.setList(newsPresenterEntity.articles)
     recyclerView.scheduleLayoutAnimation()
+  }
+
+  private fun initToolbar(){
+    toolbar.title = "Breaking News"
+    setSupportActionBar(toolbar)
   }
 
   private fun initRecyclerView() {
