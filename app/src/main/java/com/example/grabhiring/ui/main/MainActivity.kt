@@ -1,6 +1,7 @@
 package com.example.grabhiring.ui.main
 
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -46,11 +48,15 @@ class MainActivity : AppCompatActivity(), MainView {
 
   override fun setNewsList(newsPresenterEntity: NewsPresenterEntity) {
     recyclerViewAdapter.setList(newsPresenterEntity.articles)
+    recyclerView.scheduleLayoutAnimation()
   }
 
   private fun initRecyclerView() {
     recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     recyclerViewAdapter = NewsListAdapter(this, imageLoader, newListPresenter)
+    recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(
+      this, R.anim.recycler_view_layout_animation
+    )
     recyclerView.adapter = recyclerViewAdapter
   }
 }
