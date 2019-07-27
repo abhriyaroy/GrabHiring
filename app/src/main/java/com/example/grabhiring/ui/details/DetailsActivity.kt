@@ -15,6 +15,7 @@ import com.example.grabhiring.ui.adapter.NEWS_HEADING
 import com.example.grabhiring.ui.adapter.NEWS_URL
 import com.example.grabhiring.ui.utils.gone
 import com.example.grabhiring.ui.utils.showToast
+import com.example.grabhiring.ui.utils.stringRes
 import com.example.grabhiring.ui.utils.visible
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_details.*
@@ -56,7 +57,7 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
   }
 
   override fun showDetailsUrlErrorMessage() {
-    showToast("Couldn't load news details")
+    showToast(stringRes(R.string.detail_activity_url_error_message))
   }
 
   override fun showWaitLoader() {

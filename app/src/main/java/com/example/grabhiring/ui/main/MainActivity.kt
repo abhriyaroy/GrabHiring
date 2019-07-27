@@ -17,6 +17,7 @@ import com.example.grabhiring.ui.adapter.NewsListAdapter
 import com.example.grabhiring.ui.imageloader.ImageLoader
 import com.example.grabhiring.ui.utils.gone
 import com.example.grabhiring.ui.utils.showToast
+import com.example.grabhiring.ui.utils.stringRes
 import com.example.grabhiring.ui.utils.visible
 import com.uber.autodispose.ScopeProvider
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -89,11 +90,11 @@ class MainActivity : AppCompatActivity(), MainView {
   }
 
   override fun showErrorMessage() {
-    showToast("Ooops....something is not right!")
+    showToast(stringRes(R.string.main_activity_news_loading_error_message))
   }
 
   private fun initToolbar() {
-    toolbar.title = "Breaking News"
+    toolbar.title = stringRes(R.string.main_activity_tootlbar_title)
     setSupportActionBar(toolbar)
   }
 
