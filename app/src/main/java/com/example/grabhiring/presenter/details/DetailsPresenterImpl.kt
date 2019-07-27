@@ -16,8 +16,20 @@ class DetailsPresenterImpl : DetailsPresenter {
   }
 
   override fun decorateView(heading: String?, url: String?) {
+    detailsView?.showNewsHeadline(heading?:"News Details")
     if (url!=null){
       detailsView?.showNewsDetails(url)
+    } else {
+      detailsView?.showDetailsUrlErrorMessage()
+      detailsView?.exitView()
     }
+  }
+
+  override fun notifyNewsDetailsLoadingStarted() {
+    detailsView?.showWaitLoader()
+  }
+
+  override fun notifyNewsDetailsLoadingFinished() {
+    detailsView?.hideWaitLoader()
   }
 }

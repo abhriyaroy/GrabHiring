@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import android.webkit.WebSettings.LOAD_DEFAULT
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.grabhiring.R
 import com.example.grabhiring.presenter.details.DetailsContract.DetailsPresenter
@@ -53,7 +54,19 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
   }
 
   override fun showDetailsUrlErrorMessage() {
+    Toast.makeText(this, "Couldn't load news details", Toast.LENGTH_SHORT).show()
+  }
 
+  override fun showWaitLoader() {
+    progressCircle.visibility = VISIBLE
+  }
+
+  override fun hideWaitLoader() {
+    progressCircle.visibility = GONE
+  }
+
+  override fun exitView() {
+    onBackPressed()
   }
 
   private fun initToolbar() {
@@ -75,11 +88,11 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
   private fun initWebView() {
     webView.webViewClient = object : WebViewClient() {
       override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-        progressCircle.visibility = VISIBLE
+        detailsPresenter.notifyNewsDetailsLoadingStarted()
       }
 
       override fun onPageFinished(view: WebView, url: String) {
-        progressCircle.visibility = GONE
+        detailsPresenter.notifyNewsDetailsLoadingFinished()
       }
     }
     with(webView.settings) {
