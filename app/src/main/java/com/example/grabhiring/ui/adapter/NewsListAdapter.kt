@@ -23,11 +23,11 @@ class NewsListAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder {
     return NewsListViewHolder(
-      LayoutInflater.from(parent.context).inflate(
-        R.layout.item_news_list,
-        parent,
-        false
-      ), imageLoader
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.item_news_list,
+            parent,
+            false
+        ), imageLoader
     )
   }
 
@@ -47,7 +47,7 @@ class NewsListAdapter(
 }
 
 class NewsListViewHolder(itemView: View, private val imageLoader: ImageLoader) :
-  RecyclerView.ViewHolder(itemView), NewsListView {
+    RecyclerView.ViewHolder(itemView), NewsListView {
   override fun showHeadline(headLine: String?) {
     itemView.headline.text = headLine
   }
