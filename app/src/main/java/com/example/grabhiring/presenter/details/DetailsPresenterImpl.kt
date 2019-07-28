@@ -1,9 +1,11 @@
 package com.example.grabhiring.presenter.details
 
+import com.example.grabhiring.R
 import com.example.grabhiring.presenter.details.DetailsContract.DetailsPresenter
 import com.example.grabhiring.presenter.details.DetailsContract.DetailsView
+import com.example.grabhiring.ui.utils.ResourceUtils
 
-class DetailsPresenterImpl : DetailsPresenter {
+class DetailsPresenterImpl(private val resourceUtils: ResourceUtils) : DetailsPresenter {
 
   private var detailsView: DetailsView? = null
 
@@ -16,8 +18,10 @@ class DetailsPresenterImpl : DetailsPresenter {
   }
 
   override fun decorateView(heading: String?, url: String?) {
-    detailsView?.showNewsHeadline(heading?:"News Details")
-    if (url!=null){
+    detailsView?.showNewsHeadline(
+      heading ?: resourceUtils.getStringRes(R.string.details_activity_default_headline)
+    )
+    if (url != null) {
       detailsView?.showNewsDetails(url)
     } else {
       detailsView?.showDetailsUrlErrorMessage()

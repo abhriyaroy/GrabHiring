@@ -17,6 +17,8 @@ import com.example.grabhiring.domain.main.NewsInteractor
 import com.example.grabhiring.domain.main.NewsUseCase
 import com.example.grabhiring.ui.MainScheduler
 import com.example.grabhiring.ui.MainSchedulerImpl
+import com.example.grabhiring.ui.utils.ResourceUtils
+import com.example.grabhiring.ui.utils.ResourceUtilsImpl
 import dagger.Module
 import dagger.Provides
 
@@ -60,4 +62,8 @@ class AppModule {
   @PerApplication
   @Provides
   fun providesNewsUseCase(repository: Repository): NewsUseCase = NewsInteractor(repository)
+
+  @PerApplication
+  @Provides
+  fun providesResourceUtils(context: Context): ResourceUtils = ResourceUtilsImpl(context)
 }
