@@ -75,7 +75,7 @@ class NewsListViewHolder(
     }
   }
 
-  override fun expandImage(headLine: String?, url: String?) {
+  override fun showNewsDetails(headLine: String?, url: String?) {
     with(Intent(context, DetailsActivity::class.java).apply {
       putExtra(NEWS_HEADING, headLine)
       putExtra(NEWS_URL, url)

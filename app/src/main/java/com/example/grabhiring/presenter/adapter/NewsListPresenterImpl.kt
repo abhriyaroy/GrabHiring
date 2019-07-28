@@ -10,7 +10,7 @@ class NewsListPresenterImpl : NewsListPresenter {
 
   override fun getItemCount(list: List<ArticlesPresenterEntity>): Int {
     this.list = list
-    return list.size
+    return this.list.size
   }
 
   override fun onBindRepositoryRowViewAtPosition(
@@ -28,7 +28,7 @@ class NewsListPresenterImpl : NewsListPresenter {
 
   override fun handleItemClick(newsListView: NewsListView, position: Int) {
     with(list[position]) {
-      newsListView.expandImage(title, url)
+      newsListView.showNewsDetails(title, url)
     }
   }
 

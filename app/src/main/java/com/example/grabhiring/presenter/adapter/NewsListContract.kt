@@ -9,7 +9,7 @@ interface NewsListContract {
     fun showDescription(description: String?)
     fun showImage(imagePath: String?)
     fun attachClickListener()
-    fun expandImage(headLine: String?, url: String?)
+    fun showNewsDetails(headLine: String?, url: String?)
   }
 
   interface NewsListPresenter {
