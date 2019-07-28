@@ -22,7 +22,7 @@ class RepositoryImpl(
   override fun getNews(): Single<NewsDomainModel> {
     return newsApiClientFactory.getNews()
       .timeout(TimeUnit.SECONDS.toMillis(10), TimeUnit.SECONDS)
-      .map { newsDataEntity ->
+      .flatMap { newsDataEntity ->
         databaseHelper.clearCache()
         databaseHelper.saveToCache(newsDataEntity)
       }.flatMap {

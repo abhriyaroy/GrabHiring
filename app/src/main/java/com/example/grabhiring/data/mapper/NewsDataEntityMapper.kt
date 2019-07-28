@@ -23,7 +23,7 @@ class NewsDataEntityMapperImpl : NewsDataEntityMapper {
           SourceDataEntity(it.source.id, it.source.name),
           it.author, it.title, it.description, it.url, it.urlToImage, it.publishedAt, it.content
         )
-      }.toList() as ArrayList<ArticlesDataEntity>
+      }.toMutableList() as ArrayList<ArticlesDataEntity>
     )
   }
 
@@ -36,7 +36,7 @@ class NewsDataEntityMapperImpl : NewsDataEntityMapper {
           SourceDomainModel(it.source.id, it.source.name),
           it.author, it.title, it.description, it.url, it.urlToImage, it.publishedAt, it.content
         )
-      }.toList() as ArrayList<ArticlesDomainModel>
+      }.toMutableList() as ArrayList<ArticlesDomainModel>
     )
   }
 }
