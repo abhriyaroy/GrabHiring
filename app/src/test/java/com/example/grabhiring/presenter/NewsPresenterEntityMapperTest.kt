@@ -1,13 +1,13 @@
-package com.example.grabhiring.data
+package com.example.grabhiring.presenter
 
-import com.example.grabhiring.data.mapper.NewsDataEntityMapper
-import com.example.grabhiring.data.mapper.NewsDataEntityMapperImpl
-import com.example.grabhiring.data.model.ArticlesDataEntity
-import com.example.grabhiring.data.model.NewsDataEntity
-import com.example.grabhiring.data.model.SourceDataEntity
 import com.example.grabhiring.domain.model.ArticlesDomainModel
 import com.example.grabhiring.domain.model.NewsDomainModel
 import com.example.grabhiring.domain.model.SourceDomainModel
+import com.example.grabhiring.presenter.mapper.NewsPresenterEntityMapper
+import com.example.grabhiring.presenter.mapper.NewsPresenterEntityMapperImpl
+import com.example.grabhiring.presenter.model.ArticlesPresenterEntity
+import com.example.grabhiring.presenter.model.NewsPresenterEntity
+import com.example.grabhiring.presenter.model.SourcePresenterEntity
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -17,10 +17,10 @@ import java.util.*
 import java.util.UUID.randomUUID
 
 @RunWith(MockitoJUnitRunner::class)
-class NewsDataEntityMapperTest {
+class NewsPresenterEntityMapperTest {
 
-  private lateinit var newsDataEntityMapper: NewsDataEntityMapper
-  private lateinit var newsDataEntity: NewsDataEntity
+  private lateinit var newsPresenterEntityMapper: NewsPresenterEntityMapper
+  private lateinit var newsPresenterEntity: NewsPresenterEntity
   private lateinit var newsDomainModel: NewsDomainModel
   private val status = randomUUID().toString()
   private val totalResults = Random().nextInt()
@@ -36,12 +36,12 @@ class NewsDataEntityMapperTest {
 
   @Before
   fun setup() {
-    newsDataEntityMapper = NewsDataEntityMapperImpl()
-    newsDataEntity = NewsDataEntity(
+    newsPresenterEntityMapper = NewsPresenterEntityMapperImpl()
+    newsPresenterEntity = NewsPresenterEntity(
       status, totalResults,
       arrayListOf(
-        ArticlesDataEntity(
-          SourceDataEntity(sourceId, sourceName),
+        ArticlesPresenterEntity(
+          SourcePresenterEntity(sourceId, sourceName),
           author, title, description, url, urlToImage, publishedAt, content
         )
       )
@@ -58,14 +58,9 @@ class NewsDataEntityMapperTest {
   }
 
   @Test
-  fun `should return news domain model on mapFromDataEntity call success`() {
-    val result = newsDataEntityMapper.mapFromDataEntity(newsDataEntity)
-    assertEquals(newsDomainModel, result)
-  }
-
-  @Before
-  fun after() {
-
+  fun `should return presenter entity model on mapToPresenterEntity call success`() {
+    val result = newsPresenterEntityMapper.mapToPresenterEntity(newsDomainModel)
+    assertEquals(newsPresenterEntity, result)
   }
 
 }
