@@ -35,8 +35,6 @@ class RepositoryImpl(
         }
       }
       .map {
-        println(it.articles[0].source.id)
-        println(it.articles[0].source.name)
         mapper.mapFromDataEntity(it)
       }
       .subscribeOn(backgroundScheduler.getIoScheduler())
